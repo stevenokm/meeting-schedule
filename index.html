@@ -16,6 +16,9 @@
     <!-- Custom styles for this template -->
     <link href="css/scrolling-nav.css" rel="stylesheet">
 
+    <!-- dataTables CSS -->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/fh-3.1.3/r-2.2.1/datatables.min.css"/>
+
   </head>
 
   <body id="page-top">
@@ -34,6 +37,9 @@
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#services">Services</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link js-scroll-trigger" href="#schedule">Schedule</a>
             </li>
             <li class="nav-item">
               <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
@@ -78,7 +84,18 @@
       </div>
     </section>
 
-    <section id="contact">
+    <section id="schedule">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 mx-auto">
+            <h2>Schedule</h2>
+            <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-condensed table-responsive" id="scheduleTable"></table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="bg-light">
       <div class="container">
         <div class="row">
           <div class="col-lg-8 mx-auto">
@@ -107,6 +124,50 @@
     <!-- Custom JavaScript for this theme -->
     <script src="js/scrolling-nav.js"></script>
 
+    <!-- dataTables JavaScript -->
+    <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/fh-3.1.3/r-2.2.1/datatables.min.js"></script>
+
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
+    <script type='text/javascript'>
+    var publicSpreadsheetUrl = 'https://docs.google.com/spreadsheets/d/1rcURdMt8lrsvsxXFsCn8FuEsNA-XbvbVanERKZHzJAk/edit?usp=sharing';
+
+    function init() {
+      Tabletop.init( {
+        key: publicSpreadsheetUrl,
+        callback: showInfo,
+        simpleSheet: true,
+        postProcess: function(element) {
+          if (!element["title"]) {
+            //element["speaker"] = "";
+          } else {
+            // Convert string date into Date date
+            var msec = Date.parse(element["starttime"]);
+            var d = new Date(msec);
+            element["starttime"] = d.toLocaleString();
+          }
+        },
+        debug: true,
+      } );
+    }
+    window.addEventListener('DOMContentLoaded', init);
+
+    function showInfo(data, tabletop) {
+      //alert('Successfully processed!');
+      console.log(data);
+      $('#scheduleTable').DataTable({
+        "autoWidth": false,
+        "data": data,
+        "columns": [
+          {"data": 'Speaker', "title": 'Speakers'},
+          {"data": 'Start Time', "title": 'Time'},
+          {"data": 'Location', "title": 'Location'},
+        ],
+        "order": [
+          [1, "asc"],
+        ]
+      });
+    }
+    </script>
   </body>
 
 </html>
