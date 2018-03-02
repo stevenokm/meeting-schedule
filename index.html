@@ -17,8 +17,8 @@
   <link href="css/scrolling-nav.css" rel="stylesheet">
 
   <!-- dataTables CSS -->
-  <!-- TODO change CDN --->
-  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs4/dt-1.10.16/fh-3.1.3/r-2.2.1/datatables.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/css/dataTables.bootstrap4.min.css" integrity="sha256-LpykTdjMm+jVLpDWiYOkH8bYiithb4gajMYnIngj128=" crossorigin="anonymous" />
+  <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/responsive/2.2.1/css/responsive.bootstrap4.min.css"/>
 
 </head>
 
@@ -59,7 +59,7 @@
 <section id="schedule">
   <div class="container">
     <div class="row">
-      <div class="col-xs-8 col-lg-6 mx-auto">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 mx-auto">
         <h2>Schedule</h2>
         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-condensed table-responsive" id="scheduleTable"></table>
       </div>
@@ -69,8 +69,8 @@
 
 <section id="mail-list" class="bg-light">
   <div class="container">
-    <div class="row h-50">
-      <div class="col-xs-8 mx-auto">
+    <div class="row">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 mx-auto">
         <h2>Mail List</h2>
         <table cellpadding="0" cellspacing="0" border="0" class="table table-striped table-condensed table-responsive" id="maliList"></table>
         <p class="lead">Send to All</p>
@@ -82,7 +82,7 @@
 <section id="contact">
   <div class="container">
     <div class="row">
-      <div class="col-xs-8 col mx-auto">
+      <div class="col-xs-12 col-sm-12 col-md-8 col-lg-6 mx-auto">
         <h2>Contact</h2>
         <p class="lead">Maintaner: Yi-Wen Hung (<a href="mailto:ywhung@cs.nthu.edu.tw">ywhung@cs.nthu.edu.tw</a>)</p>
       </div>
@@ -99,7 +99,7 @@
 </footer>
 
 <!-- Bootstrap core JavaScript -->
-<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.bundle.min.js" integrity="sha384-feJI7QwhOS+hwpX2zkaeJQjeiwlhOP+SdQDqhgvvo1DsjtiSQByFdThsxO669S2D" crossorigin="anonymous"></script>
 <!-- Plugin JavaScript -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" integrity="sha256-H3cjtrm/ztDeuhCN9I4yh4iN2Ybx/y1RM7rMmAesA0k=" crossorigin="anonymous"></script>
@@ -109,8 +109,11 @@
 <script src="js/scrolling-nav.js"></script>
 
 <!-- dataTables JavaScript -->
-<!-- TODO change CDN --->
-<script type="text/javascript" src="https://cdn.datatables.net/v/bs4/dt-1.10.16/fh-3.1.3/r-2.2.1/datatables.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/jquery.dataTables.min.js" integrity="sha256-qcV1wr+bn4NoBtxYqghmy1WIBvxeoe8vQlCowLG+cng=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/datatables/1.10.16/js/dataTables.bootstrap4.min.js" integrity="sha256-PahDJkda1lmviWgqffy4CcrECIFPJCWoa9EAqVx7Tf8=" crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.1/js/dataTables.responsive.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/responsive/2.2.1/js/responsive.bootstrap4.min.js"></script>
+
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.20.1/moment.min.js" integrity="sha256-ABVkpwb9K9PxubvRrHMkk6wmWcIHUE9eBxNZLXYQ84k=" crossorigin="anonymous"></script>
 
 <script src='https://cdnjs.cloudflare.com/ajax/libs/tabletop.js/1.5.1/tabletop.min.js'></script>
@@ -144,8 +147,8 @@ function showSchedule(data, tabletop) {
   $('#maliList').DataTable({
     "data": data["Mail List"]["elements"],
     "columns": [
-      {"data": 'Name', "title": 'Name'},
-      {"data": 'Mail', "title": 'Email'},
+      {"data": 'Name', "title": 'Name', "width": "10%"},
+      {"data": 'Mail', "title": 'Email', "width": "80%"},
     ],
     "ordering": false,
     "pagingType": "simple_numbers",
@@ -163,21 +166,21 @@ function showSchedule(data, tabletop) {
   $('#scheduleTable').DataTable({
     "data": data["Data"]["elements"],
     "columns": [
-      {"data": 'Start Time', "title": 'Time', "type": "datetime-moment"},
-      {"data": 'Location', "title": 'Location'},
-      {"data": 'Speaker', "title": 'Speakers'},
+      {"data": 'Start Time', "title": 'Time', "type": "datetime-moment", "width": "45%"},
+      {"data": 'Speaker', "title": 'Speakers', "width": "40%"},
+      {"data": 'Location', "title": 'Location', "width": "10%"},
     ],
     "order": [
       [0, "asc"],
     ],
     "pagingType": "simple_numbers",
     "responsive": true,
-    "bPaginate": true,
-    "pageLength": 7,
+    "paginate": true,
+    "pageLength": 5,
     "lengthChange": false,
-    "bFilter": true,
-    "bInfo": false,
-    "bAutoWidth": false,
+    "filter": true,
+    "info": false,
+    "autoWidth": false,
   });
 }
 </script>

@@ -17,3 +17,7 @@ header {
 section {
   padding: 50px 0;
 }
+
+td {
+  word-break: keep-all;
+}
